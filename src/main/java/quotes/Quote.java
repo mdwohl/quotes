@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Quote {
     String quoteBody;
     String author;
-    Gson gson = new Gson();
+//    Gson gson = new Gson();
 
     public Quote(String quoteBody, String author){
         this.quoteBody = quoteBody;

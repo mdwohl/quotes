@@ -5,6 +5,7 @@ package quotes;
 
 import com.google.gson.Gson;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,6 +18,8 @@ public class App {
         String quotesJSON = scanQuotes.nextLine();
         Quote gsonQuote = gson.fromJson(quotesJSON, Quote.class);
         System.out.println(gsonQuote);
+//      Quote[] quoteArray = (Quote[] gson.fromJson(body, author, Quote.class));
+        Quote[] quoteArray = gson.fromJson(new FileReader("/src/main/resources/quotes.json"), Quote[].class);
 
     }
 
