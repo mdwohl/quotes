@@ -4,24 +4,41 @@
 package quotes;
 
 import com.google.gson.Gson;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class App {
-    public static void main(String[] args) throws IOException{
-        Gson gson = new Gson();
-        Scanner scanQuotes = new Scanner(new File ("/src/main/resources/quotes.json"));
-//        Quote quote = new Quote("body", "author");
-        String quotesJSON = scanQuotes.nextLine();
-        Quote gsonQuote = gson.fromJson(quotesJSON, Quote.class);
-        System.out.println(gsonQuote);
-//      Quote[] quoteArray = (Quote[] gson.fromJson(body, author, Quote.class));
-        Quote[] quoteArray = gson.fromJson(new FileReader("/src/main/resources/quotes.json"), Quote[].class);
 
+    public static void main(String[] args) throws FileNotFoundException {
+
+        try {
+            Gson gson = new Gson();
+
+            //originally used scanner; was not working.
+            //Scanner scanQuotes = new Scanner(new File ("/src/main/resources/quotes.json"));
+
+            Reader quoteReader = Files.newBufferedReader(Paths.get("quotes/src/main/resources/quotes.json"));
+
+            Quote[] quoteArray = gson.fromJson(quoteReader, Quote[].class);
+
+            int randomizer = (int)(Math.random() * quoteArray.length);
+            System.out.println(quoteArray[randomizer]);
+
+            quoteReader.close();
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+        class ItemDTO {
+            String author;
+            String quoteBody;
+        }
+        class TypeDTO {
+            String author;
+            String quoteBody;
+        }
     }
 
-}
 

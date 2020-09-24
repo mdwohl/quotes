@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Quote {
-    String quoteBody;
-    String author;
+    public String quoteBody;
+    public String author;
 //    Gson gson = new Gson();
 
     public Quote(String quoteBody, String author){
@@ -17,7 +17,7 @@ public class Quote {
     }
 
     public String toString(){
-        return String.format("' %s ' -%s");
+        return String.format("' %s ' - %s");
     }
 }
 
