@@ -5,18 +5,35 @@ package quotes;
 
 import com.google.gson.Gson;
 import java.io.*;
+import java.net.HttpURLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.net.URL;
+import java.net.MalformedURLException;
 
 public class App {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
+
+        URL apiURL = new URL("http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote\n");
+
+                HttpURLConnection connection = (HttpURLConnection) apiURL.openConnection();
+                connection.setRequestMethod("GET");
+
+                BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String oneLine = input.readLine();
+                StringBuffer responseString = new StringBuffer();
+
+                while(oneLine != null){
+                    responseString.append(oneLine);
+                    oneLine = input.readLine();
+                }
+
+                input.close();
+        System.out.println(responseString);
 
         try {
             Gson gson = new Gson();
-
-            //originally used scanner; was not working.
-            //Scanner scanQuotes = new Scanner(new File ("/src/main/resources/quotes.json"));
 
             Reader quoteReader = Files.newBufferedReader(Paths.get("quotes/src/main/resources/quotes.json"));
 
