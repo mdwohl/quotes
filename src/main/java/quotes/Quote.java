@@ -21,3 +21,14 @@ public class Quote {
     }
 }
 
+public class getStarWarsQuote {
+    public String newStarWarsQuote;
+
+    public getStarWarsQuote(String newStarWarsQuote){
+        this.starWarsQuote = starWarsQuote;
+    }
+
+    public String toString(){
+        return String.format("%s");
+    }
+}
